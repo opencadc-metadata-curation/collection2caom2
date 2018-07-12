@@ -1,4 +1,4 @@
-Observation.observationID = ['OBSID'], default = None
+Observation.observationID = ['OBSID'], default = test_obs
 Observation.type = OBJECT
 Observation.intent = science
 Observation.sequenceNumber = 1916216
