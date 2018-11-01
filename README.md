@@ -21,7 +21,8 @@ Generic description of how to create CAOM2 instances for a collection.
 
 # Tricks and Traps
 - what might confuse users about API and address it directly
-- explain why each gotcah is the way it is
+- explain why each gothca is the way it is
+- add the create/update - must read to update from /ams/caom2repo/sc2repo
 
 # Credits and Connections
 - contributors
