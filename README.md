@@ -1,12 +1,13 @@
 # collection2caom2
 Generic description of how to create CAOM2 instances for a collection.
 
-# Making Telescope Data Searchable
+# Making Telescope Data Findable
 - introduction
 - why product exists
 - reference CAOM2
 - similar?
 - how will the software help, and why would anyone care?
+- IVOA FAIR - findable, accessible, interoperable, resuable
 
 # Theory of Operation
 - explain the problem solved in more detail
