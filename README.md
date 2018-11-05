@@ -20,6 +20,11 @@ Generic description of how to create CAOM2 instances for a collection.
 # Worked Examples
 - with explanations and motivations
 
+## How To Create A Pipeline
+1. Create an appropriately named repository in the opencadc-metadata-curation organization.
+1. Duplicate the blank2caom2 repository, according to [these instructions](https://help.github.com/articles/duplicating-a-repository/).
+1. In the new repository, rename all the items named blank'Something'.
+
 # Tricks and Traps
 - what might confuse users about API and address it directly
 - explain why each gothca is the way it is
