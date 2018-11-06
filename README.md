@@ -29,6 +29,8 @@ Generic description of how to create CAOM2 instances for a collection.
 - what might confuse users about API and address it directly
 - explain why each gothca is the way it is
 - add the create/update - must read to update from /ams/caom2repo/sc2repo
+- repos are all on master, so anyone at any time can pull a repo and build the correct container
+- use feature flags to limit the side-effects of commits
 
 # Credits and Connections
 - contributors
