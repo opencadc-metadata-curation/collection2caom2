@@ -2,11 +2,7 @@
 
 The value of telescope data to the astronomical community increases if telescope data is findable by users other than the original PI. 
 
-The principle of "discovery of, access to, integration and analysis of task-appropriate scientific data" is [generally-recognized](https://www.force11.org/group/fairgroup/fairprinciples).
-
-### FAIR: Findable, Accessible, Interoperable, Re-Usable
-
-[The FAIR Guiding Principles for scientific data management and stewardship](https://www.nature.com/articles/sdata201618)
+The principles of "discovery of, access to, integration and analysis of task-appropriate scientific data" are [generally-recognized](https://www.nature.com/articles/sdata201618), and have been formalized as "FAIR: Findable, Accessible, Interoperable, Re-Usable".
 
 [What makes data 'findable'](https://www.force11.org/group/fairgroup/fairprinciples):
 
@@ -19,7 +15,7 @@ The repositories in this github organization address items F2 and F3 from above.
 
 The rich metadata (F2) for telescopes is described in [the Common Archive Observation Model](http://www.opencadc.org/caom2/).
 
-The searchable resource (F3) is [here](http://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/AdvancedSearch/)
+The searchable resource (F3) is [here](http://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/AdvancedSearch/).
 
 This software eases the transition from the telescope model of the data to the CAOM data model. Once the data is described in CAOM metadata, the search interface provides a well-known location for Findable telescope data.
 
