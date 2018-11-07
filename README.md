@@ -1,13 +1,34 @@
-# collection2caom2
-Generic description of how to create CAOM2 instances for a collection.
-
 # Making Telescope Data Findable
-- introduction
-- why product exists
-- reference CAOM2
-- similar?
-- how will the software help, and why would anyone care?
-- IVOA FAIR - findable, accessible, interoperable, resuable
+
+The value of telescope data to the astronomical community increases if telescope data is findable by users other than the original PI. 
+
+The principle of "discovery of, access to, integration and analysis of task-appropriate scientific data" is [generally-recognized](https://www.force11.org/group/fairgroup/fairprinciples).
+
+### FAIR: Findable, Accessible, Interoperable, Re-Usable
+
+[The FAIR Guiding Principles for scientific data management and stewardship](https://www.nature.com/articles/sdata201618)
+
+### What Makes Data 'Findable'
+
+[From](https://www.force11.org/group/fairgroup/fairprinciples):
+
+>  F1. (meta)data are assigned a globally unique and eternally persistent identifier.<br>
+>  F2. data are described with rich metadata.<br>
+>  F3. (meta)data are registered or indexed in a searchable resource.<br>
+>  F4. metadata specify the data identifier.<br>
+
+The repositories in this github organization address items F2 and F3 from above. 
+
+The rich metadata (F2) for telescopes is described in [the Common Archive Observation Model](http://www.opencadc.org/caom2/).
+
+The searchable resource (F3) is [here](http://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/AdvancedSearch/)
+
+This software eases the transition from the telescope model of the data to the CAOM data model. Once the data is described in CAOM metadata, the search interface provides a well-known location for Findable telescope data.
+
+### Other Data Models and Search Facilities
+
+1. [IVOA ObsCore Data Model](http://wiki.ivoa.net/internal/IVOA/ObsCoreDMvOnedotOne/WD-ObsCore-v1.1-20150605.pdf)
+1. [IVOA TAP Query](http://www.ivoa.net/documents/TAP/)
 
 # Theory of Operation
 - explain the problem solved in more detail
