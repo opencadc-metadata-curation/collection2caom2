@@ -8,9 +8,7 @@ The principle of "discovery of, access to, integration and analysis of task-appr
 
 [The FAIR Guiding Principles for scientific data management and stewardship](https://www.nature.com/articles/sdata201618)
 
-### What Makes Data 'Findable'
-
-[From](https://www.force11.org/group/fairgroup/fairprinciples):
+[What makes data 'findable'](https://www.force11.org/group/fairgroup/fairprinciples):
 
 >  F1. (meta)data are assigned a globally unique and eternally persistent identifier.<br>
 >  F2. data are described with rich metadata.<br>
