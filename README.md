@@ -31,10 +31,16 @@ This software eases the transition from the telescope model of the data to the C
 - establish terminology
 - be clear about why things are done as they are
 
+There are three parts to having data end up in CAOM2 Observations:
+- mapping the telescope data model to the CAOM2 data model
+- determining the relationship between telescope files and CAOM2 entities - i.e. how many Observations, Planes, Artifacts, Parts, and Chunks are created for each telescope file? This is called cardinality in the code.
+- putting the pieces of mapping and cardinality together, into a repeatable pipeline for automated execution
+
 # Detailed API Description
 
 # Worked Examples
 - with explanations and motivations
+
 
 ## Mapping Examples
 
