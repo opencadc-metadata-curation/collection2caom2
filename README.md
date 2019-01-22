@@ -62,6 +62,10 @@ See [here](https://github.com/opencadc-metadata-curation/vlass2caom2/blob/master
 
 Use this approach if the source data is in simple FITS files, and the mapping capabilities of the blueprint functionality are sufficient to capture the idiosyncracies of the TDM->CAOM2 mapping for the telescope in question.
 
+For blueprint-based implementations, when one attribute in the CAOM2 record is affected by a particular input
+value, use the blueprint. When more than one attribute in the CAOM2 record is affected by a particular
+input value, use the update method, which is invoked via a 'visitor'.
+
 ## Cardinality Examples 
 
 TBD
