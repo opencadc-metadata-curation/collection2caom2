@@ -83,6 +83,7 @@ TBD
 - add the create/update - must read to update from /ams/caom2repo/sc2repo
 - repos are all on master, so anyone at any time can pull a repo and build the correct container
 - use feature flags to limit the side-effects of work-in-progress commits
+- SimpleObservation algorithm name == 'exposure', CompositeObservation algorithm name == 'composite'. There are currently no other choices.
 
 # Credits and Connections
 - contributors
