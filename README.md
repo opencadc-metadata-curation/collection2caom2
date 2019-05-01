@@ -32,7 +32,15 @@ This software eases the transition from the telescope model of the data to the C
 - be clear about why things are done as they are
 
 Explain the problem solved in more detail:
+What astronomers want to be able to do:
 "The  ability to pose a single scientific query to multiple [collections] simultaneously" 
+The [IVOA ObsCore Data Model](http://wiki.ivoa.net/internal/IVOA/ObsCoreDMvOnedotOne/WD-ObsCore-v1.1-20150605.pdf) explains use cases quite well (see also Appendix A). The summary information from Section 2 is repeated here:
+- support multi-wavelength as well as positional and temporal searches.
+- support any type of science data product (image, cube, spectrum, time series, instrumental data, etc.)
+- directly  support  the  sorts  of  file  content  typically  found  in  archives  (FITS,  VOTable, compressed files, instrumental data, etc.
+
+What inhibits this:
+The data models that describe the output from different observatories are complex, the work of multiple creative individuals, enduring, expedient, and unique. To illustrate the wide range of models, the ALMA measurement set specification includes directory and file structure, the HST structure is proprietary and covered by ITAR regulations, and DAO began taking data in 1918, on glass plates.
 
 There are three parts to having data end up in CAOM2 Observations:
 - mapping the telescope data model to the CAOM2 data model
