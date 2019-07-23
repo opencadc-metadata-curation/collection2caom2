@@ -40,13 +40,48 @@ The [IVOA ObsCore Data Model](http://wiki.ivoa.net/internal/IVOA/ObsCoreDMvOnedo
 - directly  support  the  sorts  of  file  content  typically  found  in  archives  (FITS,  VOTable, compressed files, instrumental data, etc.
 
 What inhibits this:
-The data models that describe the output from different observatories are complex, the work of multiple creative individuals, enduring, expedient, and unique. To illustrate the wide range of models, the ALMA measurement set specification includes directory and file structure, the HST structure is proprietary and covered by ITAR regulations, and DAO began taking data in 1918, on glass plates.
+The data models that describe the output from different observatories are complex, the 
+work of multiple creative individuals, enduring, expedient, and unique. To illustrate 
+the wide range of models, the [ALMA measurement set specification](https://casa.nrao.edu/casadocs/casa-5.4.1/reference-material/measurement-set)
+ includes directory 
+and file structure, the HST structure is proprietary and covered by 
+ITAR regulations, and DAO began taking data in 1918, on glass plates.
 
 There are three parts to having data end up in CAOM2 Observations:
 - mapping the telescope data model to the CAOM2 data model
 - determining the relationship between telescope files and CAOM2 entities - i.e. how many Observations, Planes, Artifacts, Parts, and Chunks are created for each telescope file? This is called cardinality in the code.
 - putting the pieces of mapping and cardinality together, into a repeatable pipeline for automated execution
 
+This diagram describes the dependencies between python modules: 
+
+![][cdep_deps.png]
+
+- caom2utils - the generic mapping between the TDM and CAOM2, captured as the
+ObsBlueprint class
+- caom2 - the CAOM2 model
+- caom2pipe - the bits of the pipelines, common between all collections
+  - astro_composable - confine reusable code with dependencies on astropy here
+  - caom_composable - confine reusable code with dependencies on CAOM2 here
+  - execute_composable - common pipeline steps and execution control
+    - StorageName - generic interface for managing naming issues for files in collections
+    - CaomName - common code to hide CAOM-specific naming structures
+    - CaomExecute - common code to implement each TaskType in a pipeline. Extended multiple ways for specific TaskType implementations.
+    - OrganizeExecutor - takes the collection-specific Config, picks the appropriate CaomExecute children, and organizes a series of Tasks for execution. Also manages logging.
+    - additional functions that contain common code used directly by the collections to execution the work to be done
+  - manage_composable - common methods, used anywhere
+    - Metrics - for tracking how long it takes to use CADC services
+    - Rejected - for tracking known pipeline failures
+    - Config - pipeline control
+    - State - bookmarking pipeline execution
+    - Work - generic interface for chunking the next items to be processed by a pipeline
+    - Features - very basic feature flag implementation - False/True only
+- &lt;collection&gt;2caom2 - contains collection-specific code, including:
+  - extension of the fits2caom2 module for TDM -&gt; CAOM mapping code
+  - file -&gt; CAOM cardinality code
+  - extension of the StorageName class, if unique behaviour is required
+  - extension of the Work class as required. There may be multiple extensions, depending on the character of the collection.
+  - invocation of the execution_composable.run_&lt;mechanism&gt;. These mechanism invocations are the pipeline execution points.
+     
 # Detailed API Description
 
 # Worked Examples
