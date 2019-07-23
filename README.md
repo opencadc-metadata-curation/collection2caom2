@@ -48,9 +48,13 @@ and file structure, the HST structure is proprietary and covered by
 ITAR regulations, and DAO began taking data in 1918, on glass plates.
 
 There are three parts to having data end up in CAOM2 Observations:
-- mapping the telescope data model to the CAOM2 data model
+- mapping the telescope data model to the CAOM2 data model. This happens generically in the
+python module caom2utils, and collection-specifically in each &lt;collection&gt;2caom2 module.
 - determining the relationship between telescope files and CAOM2 entities - i.e. how many Observations, Planes, Artifacts, Parts, and Chunks are created for each telescope file? This is called cardinality in the code.
-- putting the pieces of mapping and cardinality together, into a repeatable pipeline for automated execution
+This happens in collection-specific code only, in each &lt;collection&gt;2caom2 module.
+- putting the pieces of mapping and cardinality together, into a repeatable pipeline for automated execution. 
+This happens generically in the caom2pipe module, with collection-specific invocations
+in &lt;collection&gt;2caom2 modules.
 
 This diagram describes the dependencies between python modules: 
 
@@ -75,6 +79,7 @@ ObsBlueprint class
     - State - bookmarking pipeline execution
     - Work - generic interface for chunking the next items to be processed by a pipeline
     - Features - very basic feature flag implementation - False/True only
+    - TaskType - enumeration of the allowable task types. This is the verbiage that a user will see in their config file.
 - &lt;collection&gt;2caom2 - contains collection-specific code, including:
   - extension of the fits2caom2 module for TDM -&gt; CAOM mapping code
   - file -&gt; CAOM cardinality code
@@ -121,11 +126,20 @@ TBD
 ### How To Create A Pipeline
 1. Create an appropriately named repository in the opencadc-metadata-curation organization.
 1. Duplicate the blank2caom2 repository, according to [these instructions](https://help.github.com/articles/duplicating-a-repository/).
-1. In the new repository, rename all the items named blank'Something'.
+1. In the new repository:
+   1. rename all the items named blank'Something'.
+   1. in main_app.py, capture the TDM -&gt; CAOM2 mapping using the blueprint for FITS keyword lookup,
+   or for function execution. Also extend and over-ride StorageName here as necessary.
+   1. in composable.py, capture the pipeline execution needs of the collection
+      1. 'collection'_run assumes the generation of the todo.txt file is done externally
+      1. 'collection'_run_by_state generates the todo.txt file content based on queries, whether of
+      tap services or other time-boxed data sources
+   1. in work.py, capture any query needs of the collection
 
 # Tricks and Traps
 - what might confuse users about API and address it directly
 - explain why each gothca is the way it is
+- all pipeline execution control comes from the file config.yml, so it must exist in the working directory
 - add the create/update - must read to update from /ams/caom2repo/sc2repo
 - repos are all on master, so anyone at any time can pull a repo and build the correct container
 - use feature flags to limit the side-effects of work-in-progress commits
