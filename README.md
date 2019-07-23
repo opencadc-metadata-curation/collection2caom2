@@ -54,7 +54,7 @@ There are three parts to having data end up in CAOM2 Observations:
 
 This diagram describes the dependencies between python modules: 
 
-![][cdep_deps.png]
+![](cdep_deps.png?raw=true)
 
 - caom2utils - the generic mapping between the TDM and CAOM2, captured as the
 ObsBlueprint class
