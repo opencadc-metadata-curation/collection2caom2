@@ -44,7 +44,7 @@ The data models that describe the output from different observatories are comple
 work of multiple creative individuals, enduring, expedient, and unique. To illustrate 
 the wide range of models, the [ALMA measurement set specification](https://casa.nrao.edu/casadocs/casa-5.4.1/reference-material/measurement-set)
  includes directory 
-and file structure, the HST structure is proprietary and covered by 
+and file structure, the [HST](https://archive.org/details/firstyearofhstob00kinn/page/270) structure is proprietary and covered by 
 ITAR regulations, and [DAO](https://centreoftheuniverse.org/early-history) began taking data in 1918, on glass plates.
 
 CAOM2 provides a consistent description of the data from different observatories. Each &lt;collection&gt;2caom2 pipeline application captures the software which produces those consistent data descriptions. 
