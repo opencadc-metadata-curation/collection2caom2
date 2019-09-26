@@ -47,7 +47,7 @@ the wide range of models, the [ALMA measurement set specification](https://casa.
 and file structure, the [HST](https://archive.org/details/firstyearofhstob00kinn/page/270) structure is proprietary and covered by 
 ITAR regulations, and [DAO](https://centreoftheuniverse.org/early-history) began taking data in 1918, on glass plates.
 
-CAOM2 provides a consistent description of the data from different observatories. Each &lt;collection&gt;2caom2 pipeline application captures the software which produces those consistent data descriptions. 
+The CAOM2 data model provides a consistent description of the data from different observatories. Each &lt;collection&gt;2caom2 pipeline application captures the software which produces those consistent data descriptions. The captured descriptions are then exposed as a searchable inventory for use by anyone who is interested.
 
 ## The Strategy Being Used
 
