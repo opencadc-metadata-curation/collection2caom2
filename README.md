@@ -45,7 +45,7 @@ work of multiple creative individuals, enduring, expedient, and unique. To illus
 the wide range of models, the [ALMA measurement set specification](https://casa.nrao.edu/casadocs/casa-5.4.1/reference-material/measurement-set)
  includes directory 
 and file structure, the HST structure is proprietary and covered by 
-ITAR regulations, and DAO began taking data in 1918, on glass plates.
+ITAR regulations, and [DAO](https://centreoftheuniverse.org/early-history) began taking data in 1918, on glass plates.
 
 CAOM2 provides a consistent description of the data from different observatories. Each &lt;collection&gt;2caom2 pipeline application captures the software which produces those consistent data descriptions. 
 
