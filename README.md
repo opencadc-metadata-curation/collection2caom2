@@ -31,7 +31,7 @@ This software eases the transition from the telescope model of the data to the C
 - establish terminology
 - be clear about why things are done as they are
 
-Explain the problem solved in more detail:
+## The Problem Being Solved
 What astronomers want to be able to do:
 "The  ability to pose a single scientific query to multiple [collections] simultaneously" 
 The [IVOA ObsCore Data Model](http://wiki.ivoa.net/internal/IVOA/ObsCoreDMvOnedotOne/WD-ObsCore-v1.1-20150605.pdf) explains use cases quite well (see also Appendix A). The summary information from Section 2 is repeated here:
@@ -46,6 +46,10 @@ the wide range of models, the [ALMA measurement set specification](https://casa.
  includes directory 
 and file structure, the HST structure is proprietary and covered by 
 ITAR regulations, and DAO began taking data in 1918, on glass plates.
+
+CAOM2 provides a consistent description of the data from different observatories. Each &lt;collection&gt;2caom2 pipeline application captures the software which produces those consistent data descriptions. 
+
+## The Strategy Being Used
 
 There are three parts to having data end up in CAOM2 Observations:
 - mapping the telescope data model to the CAOM2 data model. This happens generically in the
