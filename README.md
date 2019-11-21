@@ -138,7 +138,7 @@ TBD
 
 ### How To Create A Pipeline
 1. Create an appropriately named repository in the opencadc-metadata-curation organization.
-1. Duplicate the blank2caom2 repository, according to [these instructions](https://help.github.com/articles/duplicating-a-repository/).
+1. Create a new repository, using the blank2caom2 template repository, according to [these instructions](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-from-a-template).
 1. In the new repository:
    1. rename all the items named blank'Something'.
    1. in main_app.py, capture the TDM -&gt; CAOM2 mapping using the blueprint for FITS keyword lookup,
