@@ -93,6 +93,15 @@ ObsBlueprint class
      
 # Detailed API Description
 
+## Metrics
+
+If 'observe_execution' is set to True in the config.yml file, then the pipeline captures metrics for the CADC services invoked during its execution. In the observable_execution directory, there will be files named like 1568331248.133947.data.yml, 1568331248.133947.caom2.yml, and 1568331248.133947.fail.yml.
+
+The ‘.data.yml’ file will have entries for ‘get’, and ‘put’, and for each file, will list the time in seconds, the rate in bytes/second, and the start time as seconds since the epoch. The ‘.caom2.yml’ file will have entries for ‘create’, ‘read’, and ‘update’, and for each CAOM2 observation, will list the time in seconds, the rate in bytes/second, and the start time as seconds since the epoch. The ‘.fail.yml’ file wil list, for each file affected by a failed action, a count of how many times it failed.
+
+The files are created for every run of the pipeline.
+
+
 # Worked Examples
 - with explanations and motivations
 
@@ -147,7 +156,7 @@ TBD
 - add the create/update - must read to update from /ams/caom2repo/sc2repo
 - repos are all on master, so anyone at any time can pull a repo and build the correct container
 - use feature flags to limit the side-effects of work-in-progress commits
-- SimpleObservation algorithm name == 'exposure', CompositeObservation algorithm name == 'composite'. There are currently no other choices.
+- SimpleObservation algorithm name == 'exposure', CompositeObservation algorithm name == 'composite'.
 
 # Credits and Connections
 - contributors
