@@ -163,7 +163,7 @@ TBD
 
 #### CoordAxis1D/CoordAxis2D
 
-1. It is valid to have  bounds, range, and/or function as stated in the model. Practically, bounds is  redundant if you have a range since the range can express the bounds with more detail, including gaps in coverage. Historically, range was added later in the model life.
+1. It is valid to have  bounds, range, and/or function as stated in the model. Practically, bounds is  redundant if you have a range. Bounds provides more detail than range, including gaps in coverage, and enables a crude tile-based cutout operation later. Historically, range was added later in the model life.
 
 # Credits and Connections
 - contributors
