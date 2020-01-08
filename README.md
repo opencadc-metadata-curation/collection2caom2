@@ -156,7 +156,14 @@ TBD
 - add the create/update - must read to update from /ams/caom2repo/sc2repo
 - repos are all on master, so anyone at any time can pull a repo and build the correct container
 - use feature flags to limit the side-effects of work-in-progress commits
-- SimpleObservation algorithm name == 'exposure', CompositeObservation algorithm name == 'composite'.
+
+## Things To Know About CAOM2 Observation Construction
+
+### Chunks
+
+#### CoordAxis1D/CoordAxis2D
+
+1. It is valid to have  bounds, range, and/or function as stated in the model. Practically, bounds is  redundant if you have a range since the range can express the bounds with more detail, including gaps in coverage. Historically, range was added later in the model life.
 
 # Credits and Connections
 - contributors
