@@ -167,6 +167,9 @@ TBD
 
 # Credits and Connections
 - contributors
-- sponsors
+
+## Sponsors
+
+[CADC](http://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/)
 
 # Brief Revision History
