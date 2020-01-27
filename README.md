@@ -159,6 +159,10 @@ TBD
 
 ## Things To Know About CAOM2 Observation Construction
 
+### Planes
+
+1. Plane-level metadata is only computed for productType=science|calibration. Auxiliary artifacts (or parts or chunks) are expected to be part of another plane with science.
+
 ### Chunks
 
 #### CoordAxis1D/CoordAxis2D
