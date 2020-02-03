@@ -169,6 +169,10 @@ TBD
 
 1. It is valid to have  bounds, range, and/or function as stated in the model. Practically, bounds is  redundant if you have a range. Bounds provides more detail than range, including gaps in coverage, and enables a crude tile-based cutout operation later. Historically, range was added later in the model life.
 
+#### Chunk.naxis, Chunk.energy_axis, Chunk.time_axis, Chunk.polarization_axis, Chunk.custom_axis
+
+1. In general, assigning axis indices above the value of naxis (3 and 4 here) is allowed but more or less pointless. The only use case that would justify it is that in a FITS file there could be a header with NAXIS=2 and WCSAXES=4 which would tell the fits reader to look for CTYPE1 through 4 and axes 3 and 4 are metadata. Assign those values to Chunk only if you care about capturing that the extra wcs matadata was really in the fits header and so the order could be preserved; in general do not assign the 3 and 4.
+
 # Credits and Connections
 - contributors
 
