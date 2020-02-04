@@ -173,6 +173,10 @@ TBD
 
 1. In general, assigning axis indices above the value of naxis (3 and 4 here) is allowed but more or less pointless. The only use case that would justify it is that in a FITS file there could be a header with NAXIS=2 and WCSAXES=4 which would tell the fits reader to look for CTYPE1 through 4 and axes 3 and 4 are metadata. Assign those values to Chunk only if you care about capturing that the extra wcs matadata was really in the fits header and so the order could be preserved; in general do not assign the 3 and 4.
 
+#### SubIntervals
+
+1. SubIntervals are subject to the check "sorted by increasing value, so sample[i].upper < sample[i+1].lower"
+
 # Credits and Connections
 - contributors
 
