@@ -173,6 +173,8 @@ TBD
 
 1. In general, assigning axis indices above the value of naxis (3 and 4 here) is allowed but more or less pointless. The only use case that would justify it is that in a FITS file there could be a header with NAXIS=2 and WCSAXES=4 which would tell the fits reader to look for CTYPE1 through 4 and axes 3 and 4 are metadata. Assign those values to Chunk only if you care about capturing that the extra wcs matadata was really in the fits header and so the order could be preserved; in general do not assign the 3 and 4.
 
+1. In an exposure where the position is not relevant and only the energy and time is relevent for discovery, the easiest correct thing to do is to leave naxis, energyAxis, and timeAxis all null: the same plane metadata should be generated and that should be valid. The most correct thing to do would be to set naxis=2, positionAxis1=1, positionAxis2=2 (to indicate image) and then use a suitable coordiante system description that meant "this patch of the inside of the dome" or maybe some description of the pixel coordinate system (because wcs kind of treats the sky and the pixels as two different systems)... I don't know how to do that and it adds very minimal value (it allows Plane.position.dimension to be assigned a value).
+
 #### SubIntervals
 
 1. SubIntervals are subject to the check "sorted by increasing value, so sample[i].upper < sample[i+1].lower"
