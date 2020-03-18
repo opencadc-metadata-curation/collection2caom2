@@ -101,6 +101,28 @@ The ‘.data.yml’ file will have entries for ‘get’, and ‘put’, and for
 
 The files are created for every run of the pipeline.
 
+## Reporting
+
+At the end of a pipeline run, a file named <working directory basename>\_report.txt is created in the logging directory. The content will look like this:
+
+```
+********************************
+Location: tests
+Date: 2020-03-18T17:16:08.540069
+Execution Time: 3.98 s
+  Number of Inputs: 1
+Number of Timeouts: 0
+ Number of Retries: 1
+  Number of Errors: 1
+********************************
+```
+
+- Execution time: the time from initiating the pipeline to completion of execution.
+- Number of inputs: the number of entries originally counted. Depending on the content of config.yml, this value will originate from a work file, or files on disk, or cumulative tracking of entries when working by state.
+- Number of timeouts: the number of times exceptions that may involve timeouts were generated. Those exceptions include messages like "Read timed out", "reset by peer", "ConnectTimeoutError", and "Broken pipe". 
+- Number of retries: the number of retries executed. Depending on whether and how retry is enabled in config.yml, this value is the cumulative number of entries processed more than once.
+- Number of errors: the number of failures after the final retry. If this number is zero, a retry fixed the failures, so all entries were eventually ingested.
+
 
 # Worked Examples
 - with explanations and motivations
