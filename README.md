@@ -201,6 +201,13 @@ TBD
 
 1. SubIntervals are subject to the check "sorted by increasing value, so sample[i].upper < sample[i+1].lower"
 
+#### What if there's no WCS?
+
+1. There are OMM observations with no WCS information, because the astrometry software did not solve. The lack of solution may have been because of cloud cover or because a field is just not very populated with stars, like near the zenith, but the data still has value.
+
+There is the CoordError datatype which is set for a CoordAxes2D object that would capture this detail. By approximating a WCS solution, and providing a syser value that is representative of the point-model error of the facility (e.g. CFHT has approximately 1 arcmin), and then represent this by making the bounding box bigger by the value of the syser on the coord.
+
+
 # Credits and Connections
 - contributors
 
