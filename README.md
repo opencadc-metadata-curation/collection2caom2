@@ -49,6 +49,8 @@ ITAR regulations, and [DAO](https://centreoftheuniverse.org/early-history) began
 
 The CAOM2 data model provides a consistent description of the data from different observatories. Each &lt;collection&gt;2caom2 pipeline application captures the software which produces those consistent data descriptions. The captured descriptions are then exposed as a searchable inventory for use by anyone who is interested.
 
+Looked at another way, the CAOM2 data model provides a way to group observational data for effective querying.
+
 ## The Strategy Being Used
 
 There are three parts to having data end up in CAOM2 Observations:
@@ -90,7 +92,13 @@ ObsBlueprint class
   - extension of the StorageName class, if unique behaviour is required
   - extension of the Work class as required. There may be multiple extensions, depending on the character of the collection.
   - invocation of the execution_composable.run_&lt;mechanism&gt;. These mechanism invocations are the pipeline execution points.
-     
+
+The Advanced Search UI provides a way to find and download data for processing. Other UIs (TBD) provide ways to find and analyze data through the UI.
+
+## Terminology
+
+1. Files are the current unit of input, as that is the output of every telescope currently being discussed here.
+
 # Detailed API Description
 
 ## Metrics
@@ -184,6 +192,10 @@ TBD
 ### Planes
 
 1. Plane-level metadata is only computed for productType=science|calibration. Auxiliary artifacts (or parts or chunks) are expected to be part of another plane with science, unless it is a temporary state caused by ingestion order.
+
+### Artifacts
+
+1. Grouping files into observations/planes/artifacts is determined by how independent the files are. A measure of file independence is whether or not the file can be scientifically understood in isolation. Some observational products may be made up of multiple files - e.g. NGVS .flag, .weight, .image files make up the same observational product. Some observational products may be made up of single files - e.g. CFHT o, p, and b files. In this example, the CFHT files are independent, and thus can be grouped in isolation from each other, while the NGVS files are dependent, and should be grouped together.
 
 ### Chunks
 
