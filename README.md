@@ -193,6 +193,8 @@ TBD
 
 1. Plane-level metadata is only computed for productType=science|calibration. Auxiliary artifacts (or parts or chunks) are expected to be part of another plane with science, unless it is a temporary state caused by ingestion order.
 
+1. For radio, plane level position resolution is used to answer the question "what is the smallest scale that can be resolved?", and is most often the synthesized beam width.
+
 ### Artifacts
 
 1. Grouping files into observations/planes/artifacts is determined by how independent the files are. A measure of file independence is whether or not the file can be scientifically understood in isolation. Some observational products may be made up of multiple files - e.g. NGVS .flag, .weight, .image files make up the same observational product. Some observational products may be made up of single files - e.g. CFHT o, p, and b files. In this example, the CFHT files are independent, and thus can be grouped in isolation from each other, while the NGVS files are dependent, and should be grouped together.
