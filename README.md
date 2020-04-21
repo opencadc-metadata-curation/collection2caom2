@@ -187,6 +187,12 @@ TBD
 - repos are all on master, so anyone at any time can pull a repo and build a working version of any pipeline container
 - use feature flags to limit the side-effects of work-in-progress commits
 
+## Authorization Doesn't Really Work With sc2 Record Viewing and Retrieval
+
+1. Authorization only consults /ams content, so even if the group and membership configuration is consistent and correct, if something is not always and only public, it must exist in /ams for file download to work.
+
+   Thumbnails and previews are also affected by this /ams-only check. Viewing these files only works on sc2 if the metadata that refers to the files is also present in /ams.
+
 ## Things To Know About CAOM2 Observation Construction
 
 ### Planes
