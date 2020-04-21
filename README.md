@@ -219,13 +219,13 @@ TBD
 
 1. There are OMM observations with no WCS information, because the astrometry software did not solve. The lack of solution may have been because of cloud cover or because a field is just not very populated with stars, like near the zenith, but the data still has value.
 
-There is the CoordError datatype which is set for a CoordAxes2D object that would capture this detail. By approximating a WCS solution, and providing a syser value that is representative of the point-model error of the facility (e.g. CFHT has approximately 1 arcmin), and then represent this by making the bounding box bigger by the value of the syser on the coord.
+   There is the CoordError datatype which is set for a CoordAxes2D object that would capture this detail. By approximating a WCS solution, and providing a syser value that is representative of the point-model error of the facility (e.g. CFHT has approximately 1 arcmin), and then represent this by making the bounding box bigger by the value of the syser on the coord.
 
 #### Under what conditions should chunk.productType be set?
 
 1. Part.productType and Chunk.productType should be set if the applicable value differs from the parent. In many cases the value in the Artifact is sufficient. I think it best to set productType the minimum places, but it isn't wrong to set it everywhere.
 
-For example, a FITS file with two extensions: one science and one auxiliary. The Artifact.productType would be science and the Part.productType would be null (for the science part) and auxiliary for the auxiliary part. One would only need to set Chunk.productType if there are multiple chunks and some differed from the Artifact or Part productType.
+   For example, a FITS file with two extensions: one science and one auxiliary. The Artifact.productType would be science and the Part.productType would be null (for the science part) and auxiliary for the auxiliary part. One would only need to set Chunk.productType if there are multiple chunks and some differed from the Artifact or Part productType.
 
 
 # Credits and Connections
