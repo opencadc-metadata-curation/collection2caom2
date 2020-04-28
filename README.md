@@ -217,6 +217,8 @@ TBD
 
 1. In an exposure where the position is not relevant and only the energy and time is relevent for discovery, the easiest correct thing to do is to leave naxis, energyAxis, and timeAxis all null: the same plane metadata should be generated and that should be valid. The most correct thing to do would be to set naxis=2, positionAxis1=1, positionAxis2=2 (to indicate image) and then use a suitable coordiante system description that meant "this patch of the inside of the dome" or maybe some description of the pixel coordinate system (because wcs kind of treats the sky and the pixels as two different systems)... I don't know how to do that and it adds very minimal value (it allows Plane.position.dimension to be assigned a value).
 
+1. When there is no spatialWCS, setting naxis, position_axis_1, and position_axis_2 values to null allows services to know that they can't do WCS-based cutouts.  The pixel-based cutouts will still work as they do not use that information.
+
 #### SubIntervals
 
 1. SubIntervals are subject to the check "sorted by increasing value, so sample[i].upper < sample[i+1].lower"
@@ -233,6 +235,9 @@ TBD
 
    For example, a FITS file with two extensions: one science and one auxiliary. The Artifact.productType would be science and the Part.productType would be null (for the science part) and auxiliary for the auxiliary part. One would only need to set Chunk.productType if there are multiple chunks and some differed from the Artifact or Part productType.
 
+#### Outstanding Questions
+
+1. Where in the CAOM2 model do we keep the dimensions of the FITS data?  This is useful metadata for queries.  When searching for FLAT/BIAS calibrations one needs to have ones with the same NAXIS1/NAXIS2 values.
 
 # Credits and Connections
 - contributors
