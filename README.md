@@ -235,7 +235,19 @@ TBD
 
    For example, a FITS file with two extensions: one science and one auxiliary. The Artifact.productType would be science and the Part.productType would be null (for the science part) and auxiliary for the auxiliary part. One would only need to set Chunk.productType if there are multiple chunks and some differed from the Artifact or Part productType.
 
-#### Outstanding Questions
+### Inputs vs Members
+
+1. Members - Pat - members would all be the same type as the DerivedObservation, so in the typical case the members of a science DerivedObservation would be the science observations that were combined to create it. Thus the members list describes the intended operation.
+
+1. Inputs - Pat - inputs describes the provenance of the resulting data, so it captures what actually happened. That normally includes the planes from each of the members that was used and could also include other kinds of inputs (eg calibration inputs) that do not correspond to any observation in the members list.
+
+    There is currently no role information in the provenance/inputs but it is needed to really generalise the usage beyond just science data. If the goal is to give someone enough info to reproduce a plane from the provenance then other info would be needed.
+    
+    So, for now, I would only put the real components in members and put at least the planes from those in the inputs; adding more inputs (eg calibration inputs of a science product) can be done but I don't think it is justified right now.
+
+    If the DerivedObservation has intent=science then the members would all be intent = science.
+
+### Outstanding Questions
 
 1. Where in the CAOM2 model do we keep the dimensions of the FITS data?  This is useful metadata for queries.  When searching for FLAT/BIAS calibrations one needs to have ones with the same NAXIS1/NAXIS2 values.
 
