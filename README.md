@@ -247,6 +247,12 @@ TBD
 
     If the DerivedObservation has intent=science then the members would all be intent = science.
 
+### Permissions
+
+1. The 3 types of read access tuples can be generated in two ways:
+    1. The collection can be configured (sc2repo.properties) with an operatorGroup (aka CADC), and staffGroup (aka NGVS) and these directly enable creation of tuples for those two groups; if staffGroup is set, then a 3rd option proposalGroup=true enables generation of groups based on Observation.collection and Observation.proposal.id (and as a side effect, creation of those groups and adding the staffGroup as admin); the TEST collection has the full config; None of these are set for NGVS so no tuples are generated.
+     1. in CAOM-2.4 these permissions are part of the model and read access group URIs can be included in the observation;  thus the client could in principle create arbitrary tuples; this hasn't been done before and it could be a good idea or a bad one depending on the case at hand and how much responsibility the client wants to take (vs using the simple canned rules)
+
 ### Outstanding Questions
 
 1. Where in the CAOM2 model do we keep the dimensions of the FITS data?  This is useful metadata for queries.  When searching for FLAT/BIAS calibrations one needs to have ones with the same NAXIS1/NAXIS2 values.
