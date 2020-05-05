@@ -237,6 +237,8 @@ TBD
 
 ### Inputs vs Members
 
+1. Pat - Generally, members is what the grouping algorithm intended to include in the processing and inputs is what was actually included. In an ideal world, the inputs are simply the plane(s) of the member(s). Then one has to decide what to do with inputs that were rejected at processing time (inputs is a subset of members since we don't have any role or flags in the input relationship?) and whether inputs should refer to non-member (eg calibration inputs for a science co-add) entities. That's in principle within scope of provenance but I don't have any use cases to guide me in giving advice and we don't really have any s/w or systems that use the provenance metadata. Mostly we want users to be able to tell whether A and B have common "photon ancestry", bit only because we always thought it was important for people to know that (not that we know of anyone doing the necessary queries).
+
 1. Members - Pat - members would all be the same type as the DerivedObservation, so in the typical case the members of a science DerivedObservation would be the science observations that were combined to create it. Thus the members list describes the intended operation.
 
 1. Inputs - Pat - inputs describes the provenance of the resulting data, so it captures what actually happened. That normally includes the planes from each of the members that was used and could also include other kinds of inputs (eg calibration inputs) that do not correspond to any observation in the members list.
