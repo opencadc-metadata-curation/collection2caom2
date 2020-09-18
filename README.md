@@ -137,10 +137,12 @@ At the end of a pipeline run, a file named <working directory basename>\_report.
 Location: tests
 Date: 2020-03-18T17:16:08.540069
 Execution Time: 3.98 s
-  Number of Inputs: 1
-Number of Timeouts: 0
- Number of Retries: 1
-  Number of Errors: 1
+    Number of Inputs: 1
+ Number of Successes: 0
+  Number of Timeouts: 0
+   Number of Retries: 1
+    Number of Errors: 1
+Number of Rejections: 0
 ********************************
 ```
 
