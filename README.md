@@ -72,7 +72,10 @@ ObsBlueprint class
 - caom2pipe - the bits of the pipelines, common between all collections
   - astro_composable - confine reusable code with dependencies on astropy here
   - caom_composable - confine reusable code with dependencies on CAOM2 here
-  - data_source_composable - common pipeline code to encapsulate the mechanisms for identifying the set of work to be done. The identification varies based on data source type, which may include listing a local file system directory, reading the contents of a file, retrieving a listing from a service, or issuing a time-boxed query to a database. Default implementations are provided. Used in the run_composable module.
+  - data_source_composable - common pipeline code to encapsulate the mechanisms for identifying the set of work to be done. The identification varies based on data source type, which may include listing a local file system directory, reading the contents of a file, retrieving a listing from a service, or issuing a time-boxed query to a database. The entries in the list of work to be done must be understood by collection-specific StorageName specializations. Used in the run_composable module. Default implementations are:
+    - ListDirDataSource - list files in a local file system by naming patterns
+    - QueryTimeBoxDataSource - time-boxed queries of a TAP service
+    - TodoFileDataSource - read the contents of a file
   - execute_composable - common pipeline steps and execution control
     - CaomExecute - common code to implement each TaskType in a pipeline. Extended multiple ways for specific TaskType implementations.
     - OrganizeExecutor - takes the collection-specific Config, picks the appropriate CaomExecute children, and organizes a series of Tasks for execution. Also manages logging.
@@ -88,6 +91,10 @@ ObsBlueprint class
     - TaskType - enumeration of the allowable task types. This is the verbiage that a user will see in their config file.
     - PreviewVisitor - common code for generating preview and thumbnail images for a collection
   - name_builder_composable - encapsulates common ways to create StorageName instances. Depending on Config parameters to identify whether the work to be done by the pipeline is identified by file names, observation IDs, or URLs
+    - FileNameBuilder - builds a StorageName instance with a file_name parameter
+    - ObsIDBuilder - builds a StorageName instance with an obs_id parameter
+    - StorageNameBuilder - abstract class
+    - StorageNameInstanceBuilder - default implementation that returns whatever it gets
   - run_composable - common code used directly by the collections. Relies on name_builder_composable to provide the correct inputs, and data_source_composable to identify the work to be done.
     - RunnerReport - summarizes successes, failures, retries, and execution errors for a pipeline execution instance
     - StateRunner - common code for time-boxed execution. A specialization of TodoRunner.
