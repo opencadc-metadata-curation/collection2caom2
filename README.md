@@ -148,9 +148,11 @@ Number of Rejections: 0
 
 - Execution time: the time from initiating the pipeline to completion of execution.
 - Number of inputs: the number of entries originally counted. Depending on the content of config.yml, this value will originate from a work file, or files on disk, or cumulative tracking of entries when working by state.
+- Number of successes: the number of entries that eventually succeed, including retries.
 - Number of timeouts: the number of times exceptions that may involve timeouts were generated. Those exceptions include messages like "Read timed out", "reset by peer", "ConnectTimeoutError", and "Broken pipe". 
 - Number of retries: the number of retries executed. Depending on whether and how retry is enabled in config.yml, this value is the cumulative number of entries processed more than once.
 - Number of errors: the number of failures after the final retry. If this number is zero, a retry fixed the failures, so all entries were eventually ingested.
+- Number of rejections: the number of entries that are rejected due to well-known processing failures.
 
 
 # Worked Examples
