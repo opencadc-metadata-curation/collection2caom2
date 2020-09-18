@@ -101,8 +101,9 @@ ObsBlueprint class
   - extension of the fits2caom2 module for TDM -&gt; CAOM mapping code
   - file -&gt; CAOM cardinality code
   - extension of the StorageName class, if unique behaviour is required
-  - extension of the Work class as required. There may be multiple extensions, depending on the character of the collection.
-  - invocation of the execution_composable.run_&lt;mechanism&gt;. These mechanism invocations are the pipeline execution points.
+  - extension of the data_source_composable classes as required. There may be multiple extensions, depending on the character of the collection.
+  - extension of the name_builder_composable classes as required.
+  - invocation of the run_composable mechanism. These mechanism invocations are the pipeline execution points.
 
 The Advanced Search UI provides a way to find and download data for processing. Other UIs (TBD) provide ways to find and analyze data through the UI.
 
