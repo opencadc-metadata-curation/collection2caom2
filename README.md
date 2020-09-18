@@ -200,7 +200,7 @@ TBD
       1. 'collection'_run assumes the generation of the todo.txt file is done externally
       1. 'collection'_run_by_state generates the todo.txt file content based on queries, whether of
       tap services or other time-boxed data sources
-   1. in work.py, capture any query needs of the collection
+   1. use data_source_composable and name_builder_composable classes, or provide collection-based specializations, to capture query needs
 
 # Tricks and Traps
 - what might confuse users about API and address it directly
