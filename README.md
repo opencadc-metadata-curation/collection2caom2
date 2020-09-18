@@ -72,20 +72,31 @@ ObsBlueprint class
 - caom2pipe - the bits of the pipelines, common between all collections
   - astro_composable - confine reusable code with dependencies on astropy here
   - caom_composable - confine reusable code with dependencies on CAOM2 here
+  - data_source_composable - common pipeline code to encapsulate the mechanisms for identifying the set of work to be done. The identification varies based on data source type, which may include listing a local file system directory, reading the contents of a file, retrieving a listing from a service, or issuing a time-boxed query to a database. Default implementations are provided. Used in the run_composable module.
   - execute_composable - common pipeline steps and execution control
-    - StorageName - generic interface for managing naming issues for files in collections
-    - CaomName - common code to hide CAOM-specific naming structures
     - CaomExecute - common code to implement each TaskType in a pipeline. Extended multiple ways for specific TaskType implementations.
     - OrganizeExecutor - takes the collection-specific Config, picks the appropriate CaomExecute children, and organizes a series of Tasks for execution. Also manages logging.
-    - additional functions that contain common code used directly by the collections to execution the work to be done
   - manage_composable - common methods, used anywhere
+    - StorageName - generic interface for managing naming issues for files in collections, and for capturing the relationship between file names, observation IDs, and product IDs
+    - CaomName - common code to hide CAOM-specific naming structures
     - Metrics - for tracking how long it takes to use CADC services
     - Rejected - for tracking known pipeline failures
+    - Observable - container for Metrics and Rejected instances for a pipeline
     - Config - pipeline control
     - State - bookmarking pipeline execution
-    - Work - generic interface for chunking the next items to be processed by a pipeline
     - Features - very basic feature flag implementation - False/True only
     - TaskType - enumeration of the allowable task types. This is the verbiage that a user will see in their config file.
+    - PreviewVisitor - common code for generating preview and thumbnail images for a collection
+  - name_builder_composable - encapsulates common ways to create StorageName instances. Depending on Config parameters to identify whether the work to be done by the pipeline is identified by file names, observation IDs, or URLs
+  - run_composable - common code used directly by the collections. Relies on name_builder_composable to provide the correct inputs, and data_source_composable to identify the work to be done.
+    - RunnerReport - summarizes successes, failures, retries, and execution errors for a pipeline execution instance
+    - StateRunner - common code for time-boxed execution. A specialization of TodoRunner.
+    - TodoRunner - common code for work execution.
+  - transfer_composable - abstraction to represent transferring a file from one point to another, and checking that the transfer occurred correctly
+    - CadcTransfer - get a file from CADC storage
+    - FtpTransfer - get a file from an FTP site
+    - HttpTransfer - get a file from an HTTP site
+    - VoTransfer - get a file from vault
 - &lt;collection&gt;2caom2 - contains collection-specific code, including:
   - extension of the fits2caom2 module for TDM -&gt; CAOM mapping code
   - file -&gt; CAOM cardinality code
