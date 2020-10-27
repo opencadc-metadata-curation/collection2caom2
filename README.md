@@ -277,6 +277,12 @@ TBD
 1. The 3 types of read access tuples can be generated in two ways:
     1. The collection can be configured (sc2repo.properties) with an operatorGroup (aka CADC), and staffGroup (aka NGVS) and these directly enable creation of tuples for those two groups; if staffGroup is set, then a 3rd option proposalGroup=true enables generation of groups based on Observation.collection and Observation.proposal.id (and as a side effect, creation of those groups and adding the staffGroup as admin); the TEST collection has the full config; None of these are set for NGVS so no tuples are generated.
      1. in CAOM-2.4 these permissions are part of the model and read access group URIs can be included in the observation;  thus the client could in principle create arbitrary tuples; this hasn't been done before and it could be a good idea or a bad one depending on the case at hand and how much responsibility the client wants to take (vs using the simple canned rules)
+     
+### MultiPolygon
+
+The use cases for defining boundaries do not include holes.
+
+At the plane level, the searchable (indexed) Plane.positiion.bounds is just the simple Polygon or Circle; the Plane.position.bounds.samples MultiPolygon can store the exact boundaries/coverage (including holes) but there is no way to search that would, for example, exclude data where the target coordinates were in the hole or even between disjoint areas. So, while in principle the plane metadata supplied could include holes, the server-side computation does not (can not?) be made to generate it. Creating a number of artifacts/parts/chunks/ that don't match the file structure would end up being worse. Right now, the best that can be done is to ignore the hole and just store the encompassing polygon.
 
 ### Outstanding Questions
 
