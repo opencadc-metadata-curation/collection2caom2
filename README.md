@@ -284,6 +284,10 @@ The use cases for defining boundaries do not include holes.
 
 At the plane level, the searchable (indexed) Plane.positiion.bounds is just the simple Polygon or Circle; the Plane.position.bounds.samples MultiPolygon can store the exact boundaries/coverage (including holes) but there is no way to search that would, for example, exclude data where the target coordinates were in the hole or even between disjoint areas. So, while in principle the plane metadata supplied could include holes, the server-side computation does not (can not?) be made to generate it. Creating a number of artifacts/parts/chunks/ that don't match the file structure would end up being worse. Right now, the best that can be done is to ignore the hole and just store the encompassing polygon.
 
+### Observable Axis
+
+SGw: observable is for the case where a spectra is represented with a 2 row image: one row for wavelength, and one row for flux.
+
 ### Outstanding Questions
 
 1. Where in the CAOM2 model do we keep the dimensions of the FITS data?  This is useful metadata for queries.  When searching for FLAT/BIAS calibrations one needs to have ones with the same NAXIS1/NAXIS2 values.
