@@ -228,6 +228,8 @@ TBD
 
 1. Grouping files into observations/planes/artifacts is determined by how independent the files are. A measure of file independence is whether or not the file can be scientifically understood in isolation. Some observational products may be made up of multiple files - e.g. NGVS .flag, .weight, .image files make up the same observational product. Some observational products may be made up of single files - e.g. CFHT o, p, and b files. In this example, the CFHT files are independent, and thus can be grouped in isolation from each other, while the NGVS files are dependent, and should be grouped together.
 
+1. The impact of `productType`: if an Artifact has `productType = info` it is ignored when the services compute plane metadata.
+
 ### Chunks
 
 #### CoordAxis1D/CoordAxis2D
