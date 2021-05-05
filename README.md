@@ -244,6 +244,12 @@ TBD
 
 1. When there is no spatialWCS, setting naxis, position_axis_1, and position_axis_2 values to null allows services to know that they can't do WCS-based cutouts.  The pixel-based cutouts will still work as they do not use that information.
 
+#### Chunk.observable
+
+The `chunk.observable` doesn’t currently provide info that is actionable in any CADC services, but also there is no other place to put the `observable.cunit` which does seem like it would be useful in future.
+
+`observable.ctype` (coordinate type) was probably not the best name for this field because we’re wanting to put things in it that are not really coordinate types. The UCD is a better way to say “what are these values” since it is a vocabulary of astronomical concepts, so maybe we shpuld put UCDs here (in order to be able to also put the units) and then make sure the UCD of the science chunk.observable is also in the Plane.observable.ucd field. Usable UCD values are pending.
+
 #### SubIntervals
 
 1. SubIntervals are subject to the check "sorted by increasing value, so sample[i].upper < sample[i+1].lower"
