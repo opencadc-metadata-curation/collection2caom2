@@ -201,6 +201,12 @@ TBD
       1. 'collection'_run_by_state generates the todo.txt file content based on queries, whether of
       tap services or other time-boxed data sources
    1. use data_source_composable and name_builder_composable classes, or provide collection-based specializations, to capture query needs
+ 
+## Motivations
+
+1. Spatial WCS and where it's used:
+   1. datalink service calls the SODA cutout service and provides maximum bounds (the minimum circle or polygon that would return all the pixels -- so cutouts that work are inside that). The minimum spanning circle is calculated using the `chunk.position.bounds` WCS information.
+   1. SODA service converts inputs to pixels and performs some clipping, so it only uses the `chunk.position.function` WCS information.
 
 # Tricks and Traps
 - what might confuse users about API and address it directly
