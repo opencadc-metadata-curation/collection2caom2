@@ -72,6 +72,7 @@ ObsBlueprint class
 - caom2pipe - the bits of the pipelines, common between all collections
   - astro_composable - confine reusable code with dependencies on astropy here
   - caom_composable - confine reusable code with dependencies on CAOM2 here
+  - client_composable - confine long-lived HTTP `Session` instances here, for use across other classes.
   - data_source_composable - common pipeline code to encapsulate the mechanisms for identifying the set of work to be done. The identification varies based on data source type, which may include listing a local file system directory, reading the contents of a file, retrieving a listing from a service, or issuing a time-boxed query to a database. The entries in the list of work to be done must be understood by collection-specific StorageName specializations. Used in the run_composable module. Default implementations are:
     - ListDirDataSource - list files in a local file system by naming patterns
     - QueryTimeBoxDataSource - time-boxed queries of a TAP service
