@@ -72,6 +72,7 @@ ObsBlueprint class
 - caom2pipe - the bits of the pipelines, common between all collections
   - astro_composable - confine reusable code with dependencies on astropy here
   - caom_composable - confine reusable code with dependencies on CAOM2 here
+  - client_composable - confine long-lived HTTP `Session` instances here, for use across other classes.
   - data_source_composable - common pipeline code to encapsulate the mechanisms for identifying the set of work to be done. The identification varies based on data source type, which may include listing a local file system directory, reading the contents of a file, retrieving a listing from a service, or issuing a time-boxed query to a database. The entries in the list of work to be done must be understood by collection-specific StorageName specializations. Used in the run_composable module. Default implementations are:
     - ListDirDataSource - list files in a local file system by naming patterns
     - QueryTimeBoxDataSource - time-boxed queries of a TAP service
@@ -95,6 +96,10 @@ ObsBlueprint class
     - ObsIDBuilder - builds a StorageName instance with an obs_id parameter
     - StorageNameBuilder - abstract class
     - StorageNameInstanceBuilder - default implementation that returns whatever it gets
+  - reader_composable - common code to retrieve FITS headers and file metadata (needed to fill in Artifact metadata) for all file types from some location. Used in the CaomExecute and OrganizeExecutors implementations to limit the retrieval of this sometimes time-wise expensive information to once per file.
+    - FileMetadataReader - from local disk
+    - StorageClientReader - CADC storage, either AD or Storage Inventory
+    - VaultReader - vos storage URIs
   - run_composable - common code used directly by the collections. Relies on name_builder_composable to provide the correct inputs, and data_source_composable to identify the work to be done.
     - RunnerReport - summarizes successes, failures, retries, and execution errors for a pipeline execution instance
     - StateRunner - common code for time-boxed execution. A specialization of TodoRunner.
@@ -229,6 +234,13 @@ TBD
 1. Plane-level metadata is only computed for productType=science|calibration. Auxiliary artifacts (or parts or chunks) are expected to be part of another plane with science, unless it is a temporary state caused by ingestion order.
 
 1. For radio, plane level position resolution is used to answer the question "what is the smallest scale that can be resolved?", and is most often the synthesized beam width.
+ 
+1. For projects that speak SKA product levels as defined on Page 3 of [https://www.skatelescope.org/wp-content/uploads/2013/04/Cornwell-SKA_Lowscienceassessmentdataproducts.pdf], here's the mapping to the `Plane.calibrationLevel` values in the model:
+  - everything up to level 3 (correlator output ) would be calibration level 0 in ObsCore and CAOM.
+  - the visibility data in level 3 could be calibration level 0 or 1 (raw).
+  - for the things in level 5, calibrated data would be calibration level 2 (but not sure what that is relative to "images" and would have to know that to decide). My understanding of radio "imaging" process is that they would be calibration level 3 (products) because there are many ways to tune the imaging to produce different products for different purposes.
+  - for catalogues, ObsCore and CAOM don't treat those as simply higher calibration level; that's just a different kind of thing that itself could be raw (source detection data) or more processed to produce a calibration level 2 or 3 (product)... although the latter sound more like something in level 7 of that slide.
+  - level 6 and 7 products in that slide look more like calibration level 2-3 made/vetted by other teams.
 
 ### Artifacts
 
