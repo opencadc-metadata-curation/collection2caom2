@@ -72,6 +72,8 @@ ObsBlueprint class
 - caom2pipe - the bits of the pipelines, common between all collections
   - astro_composable - confine reusable code with dependencies on astropy here
   - caom_composable - confine reusable code with dependencies on CAOM2 here
+    - TelescopeMapping - A default implementation for building up and applying an ObsBlueprintmap for a file, and then doing any n:n (FITS keywords:CAOM2 keywords) mapping, using the 'update' method.
+    - Fits2caom2Visitor -     Use a TelescopeMapping specialization instance to create a CAOM2 record, as expected by the execute_composable.MetaVisits class. 
   - client_composable - confine long-lived HTTP `Session` instances here, for use across other classes.
   - data_source_composable - common pipeline code to encapsulate the mechanisms for identifying the set of work to be done. The identification varies based on data source type, which may include listing a local file system directory, reading the contents of a file, retrieving a listing from a service, or issuing a time-boxed query to a database. The entries in the list of work to be done must be understood by collection-specific StorageName specializations. Used in the run_composable module. Default implementations are:
     - ListDirDataSource - list files in a local file system by naming patterns
