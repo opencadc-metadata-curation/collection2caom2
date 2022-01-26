@@ -165,6 +165,43 @@ Number of Rejections: 0
 # Worked Examples
 - with explanations and motivations
 
+## What is a Blueprint?
+
+A blueprint is a map from the CAOM2 elements to the FITS keyword values, before that blueprint has been exposed to the values that are in a specific FITS file. It is an indirect lookup mechanism.
+
+A blueprint fragment:
+   ```
+   Chunk.position.coordsys:(['RADESYS'], None)
+   Chunk.position.equinox:(['EQUINOX', 'EPOCH'], None)
+   Chunk.position.axis.axis1.ctype:(['CTYPE1'], None)
+   Chunk.position.axis.axis1.cunit:(['CUNIT1'], None)
+   Chunk.position.axis.axis2.ctype:(['CTYPE2'], None)
+   Chunk.position.axis.axis2.cunit:(['CUNIT2'], None)
+   Chunk.position.axis.error1.syser:(['CSYER1'], None)
+   Chunk.position.axis.error1.rnder:(['CRDER1'], None)
+   Chunk.position.axis.error2.syser:(['CSYER2'], None)
+   Chunk.position.axis.error2.rnder:(['CRDER2'], None)
+   Chunk.position.axis.function.cd11:(['CDELT1'], None)
+   Chunk.position.axis.function.cd12:0.0
+   Chunk.position.axis.function.cd21:0.0
+   Chunk.position.axis.function.cd22:(['CDELT2'], None)
+   Chunk.position.axis.function.dimension.naxis1:(['ZNAXIS1', 'NAXIS1'], None)
+   Chunk.position.axis.function.dimension.naxis2:(['ZNAXIS2', 'NAXIS2'], None)
+   Chunk.position.axis.function.refCoord.coord1.pix:(['CRPIX1'], None)
+   Chunk.position.axis.function.refCoord.coord1.val:(['CRVAL1'], None)
+   Chunk.position.axis.function.refCoord.coord2.pix:(['CRPIX2'], None)
+   Chunk.position.axis.function.refCoord.coord2.val:(['CRVAL2'], None)
+   ```
+The pattern of a blueprint:
+ 
+`caom2 element.attribute tree:(['FITS KEYWORD 1', 'FITS KEYWORD 2', …], DEFAULT_VALUE)`
+
+For the example of `CTYPE1`:
+- the caom2 element.attribute tree is `Chunk.position.axis.axis1.ctype`
+- the list of FITS keywords is length 1, and is `[‘CTYPE1’]`
+- the DEFAULT_VALUE is `None`
+
+The software takes the information stored in this blueprint, and processed the FITS header information based on that. When trying to set a value for  Chunk.position.axis.axis1.ctype it will look in the FITS header at the value of the keyword CTYPE1, and use that value if it exists.
 
 ## Mapping Examples
 
