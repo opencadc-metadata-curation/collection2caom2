@@ -161,6 +161,9 @@ Number of Rejections: 0
 - Number of errors: the number of failures after the final retry. If this number is zero, a retry fixed the failures, so all entries were eventually ingested.
 - Number of rejections: the number of entries that are rejected due to well-known processing failures.
 
+## Repository Configuration
+The CAOM2 repositories:
+  -  will need an operatorGroup and staffGroup to generate read access tuples for QA
 
 # Worked Examples
 - with explanations and motivations
