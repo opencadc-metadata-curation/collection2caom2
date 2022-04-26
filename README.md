@@ -49,11 +49,11 @@ ITAR regulations, and [DAO](https://centreoftheuniverse.org/early-history) began
 
 The CAOM2 data model provides a consistent description of the data from different observatories. Each &lt;collection&gt;2caom2 pipeline application captures the software which produces those consistent data descriptions. The captured descriptions are then exposed as a searchable inventory for use by anyone who is interested.
 
-Looked at another way, the CAOM2 data model provides a way to group observational data for effective querying.
+Looked at another way, the CAOM2 data model provides a way to group observational data for effective querying, and effective querying requires metadata normalization to the CAOM2 data model, and metadata cleaning for consistency with the CAOM2 data model.
 
 ## The Strategy Being Used
 
-There are three parts to having data end up in CAOM2 Observations:
+There are three parts to having data represented by CAOM2 Observations:
 - mapping the telescope data model to the CAOM2 data model. This happens generically in the
 python module caom2utils, and collection-specifically in each &lt;collection&gt;2caom2 module.
 - determining the relationship between telescope files and CAOM2 entities - i.e. how many Observations, Planes, Artifacts, Parts, and Chunks are created for each telescope file? This is called cardinality in the code.
