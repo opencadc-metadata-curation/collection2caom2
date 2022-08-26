@@ -127,6 +127,12 @@ The Advanced Search UI provides a way to find and download data for processing. 
 
 # Detailed API Description
 
+## Logs
+
+If `log_to_file` is set to `True` in the `config.yml` file, then in the `log_file_directory`, the pipeline captures individual `observation_id.log` and `observation_id.xml` files for each file ingested. The `.log` files can sometimes be useful for debugging the causes of ingestion failures. The `.xml` files are useful for reproducing server-side ingestion errors.
+
+There are always summary files of an ingestion run in the `logs` directory. By default, these files are named `success.txt`, `failure.txt`, and `retries.txt`. Successive runs rename the existing summary files with a `success.<timestamp>.txt`, `failure.<timestamp>.txt`, and retries.<timestamp>.txt`  pattern.
+
 ## Metrics
 
 If 'observe_execution' is set to True in the config.yml file, then the pipeline captures metrics for the CADC services invoked during its execution. In the observable_execution directory, there will be files named like 1568331248.133947.data.yml, 1568331248.133947.caom2.yml, and 1568331248.133947.fail.yml.
