@@ -9,7 +9,7 @@ The CDEP includes the:
    1. people that code, test, review, and execute that software.
    1. process by which that software is coded, tested, made operational, and operated.
    1. collection metadata and data available from CADC.
-   1. CAOM model, in its current and future forms.
+   1. [CAOM model](https://www.opencadc.org/caom2/), in its current and future forms.
    1. people who understand the CAOM model, and the collection metadata and data, and can correlate the two.
    1. process by which these people correlate the collection metadata to the CAOM model.
    1. process by which CAOM content for collections is tested for completeness and correctness, reviewed for consistency with the CAOM representation of other collections, and assessed for general quality assurance.
@@ -17,17 +17,15 @@ The CDEP includes the:
 
 CDEP Vocabulary:
    1. Pipeline - installed software required to create a CAOM instance for a collection.
-   1. Blueprint - a new mechanism for capturing the mapping between a Telescope Data Model (TDM) and CAOM.
+   1. Blueprint - a mechanism for capturing the mapping between a Telescope Data Model (TDM) and CAOM.
 
 
 ## Who Does What
-There are three roles in the CDEP - data engineers, developers, and operators.
+There are three roles in the CDEP - astronomers as subject matter expers, developers, and operators.
 
-Data Engineers are responsible for:
-   1. coding small applications that do astronomy-specific, collection-specific work
-   1. coding small functions that do common astronomy-specific work
-   1. coding tests for any astronomy-specific code
-   1. reviewing astronomy-specific code submitted to github by other astronomers
+Astronomers are responsible for:
+   1. coding or providing pseudocode for small applications that do astronomy-specific, collection-specific work
+   1. coding or providing pseudocode for small functions that do common astronomy-specific work
    1. using github for any code
    1. defining the TDM->CAOM mapping
    1. identifying the cardinality for the TDM->CAOM mapping
@@ -37,11 +35,11 @@ Data Engineers are responsible for:
    1. reviewing CAOM entries in production for correctness and completeness
    1. reviewing CAOM entries for consistency with the representation of other collections
    1. reviewing CAOM entries for general quality assurance. This includes:
-   1. extracting observation data from the relevant archive to check that the metadata is being expressed correctly
-   1. checking that metadata in CADC agrees with metadata expressed at other telescope and archive sites
+      1. extracting observation data from the relevant archive to check that the metadata is being expressed correctly
+      1. checking that metadata in CADC agrees with metadata expressed at other telescope and archive sites
    1. general support of developers during the iterative automation of the Telescope->CAOM pipeline
    1. collaborative selection of which collections to include in the CAOM content
-   1. using the content of the CAOM to execute science applications to ensure modelling utility
+   1. using the content of the CAOM to execute science applications to ensure modeling utility
    1. exploring new metadata presentation and search approaches
 
 Developers are responsible for:
@@ -52,25 +50,25 @@ Developers are responsible for:
    1. coding tests for pipelines
    1. reviewing pipeline code
    1. identifying common code between pipelines, abstracting that code into libraries, and replacing the duplicate code in pipelines with the library versions
-   1. document for consumption by DEs as well as developers
-   1. open-source software, available from github
+      1. document for consumption by astronomers as well as developers
+      1. open-source software, available from github
    1. coding tests for common pipeline code
    1. reviewing common pipeline code
-   1. providing pipeline code in containers
+   1. providing pipeline code in Docker images
    1. instrumenting pipelines for debugging and operations support
    1. automating pipeline execution
    1. testing pipeline execution
    1. releasing the pipelines to operations
    1. providing operational support for pipeline execution
-   1. interacting with data engineers for help with mappings, cardinality, and astronomy-specific code integration
-   1. providing DEs with assistance in coding and testing
-   1. what does good code look like
+   1. interacting with astronomers for help with mappings, cardinality, and astronomy-specific code integration
+   1. providing astronomers with assistance in coding and testing
+      1. what does good code look like
    1. providing knowledge transfer for existing common libraries and functions that support pipeline development
 
 Operators are responsible for:
    1. providing test environments for:
        1. pipeline execution
-       1. storage interaction (stortest7-01, stortest7-02)
+       1. storage interaction
           1. mitigate the need for Operations oversight by writing 0-byte files as the cleanup part of tests that touch the storage
        1. CADC service invocation (sc2)
    1. review operational requirements of pipelines prior to operational deployment
@@ -78,97 +76,103 @@ Operators are responsible for:
    1. providing operational monitoring of pipeline execution, and feedback to developers upon failures
 
 ## How To Identify Common Bits
+
 Identifying the bits that are common between pipelines will only be possible with familiarity with multiple pipelines.
 
 The pipelines that currently exist at CADC are custom to each collection, and handled by individual DEs. A developer will achieve the necessary familiarity for the identification of common bits, by adopting the CDEP for each custom collection pipeline. 
 
 The steps toward CDEP adoption for each collection will be:
-   1. The DE will identify the existing bits for a pipeline. This will include:
-code
-scripts
-cron jobs
-VM Resource Requirements
-VM flavour
-additional installed software
-users
-credentials
-configuration
-representative test files that have existing CAOM instances
+   1. The astronomer will identify the existing bits for a pipeline. This may include:
+      1. code
+      1. scripts
+      1. cron jobs
+      1. VM Resource Requirements
+         1. VM flavour
+         1. additional installed software
+         1. users
+         1. credentials
+         1. configuration
+      1. representative test files that have existing CAOM instances
    1. A developer will assemble the existing bits into a github project.
-   1. A developer will transition the existing bits to use the python fits2caom2 application as a drop-in replacement to the Java application.
-   1. A developer will verify the transition by comparing the output generated by python with the existing CAOM instances, for the representative test files.
-   1. The DE will confirm that any differences between the operational instance and the python-generated instance have no scientific implications.
+   1. A developer will transition the existing bits to use the [Python caom2tools libarary](https://github.com/opencadc/caom2tools.git).
+   1. A developer will verify the transition by comparing the output generated by Python with the existing CAOM instances, for the representative test files.
+   1. The astronomer will confirm that any differences between the operational instance and the python-generated instance have no scientific implications.
       1. For example, there may be differences in the default WCS units in a Chunk element.
    1. A developer will automate the checking of the representative test files as integration tests for the collection.
-   1. A developer will create a pipeline for the fits2caom2 portion only.
-   1. A developer will build a Docker container for the pipeline.
+   1. A developer will create a pipeline to be responsible for the following functionality, as necessary:
+      1. file storage
+      2. CAOM2 record creation
+      3. supplementary files - e.g. thumbnails, previews
+   1. A developer will build a Docker image for the pipeline.
    1. A developer will test the pipeline against sc2.
    1. A developer will make the initial collection2caom2 pipeline container available to Operations.
-   1. Operations will execute the initial collection2caom2 pipeline based on the schedule given by the DE.
+   1. Operations will execute the initial collection2caom2 pipeline based on the schedule given by the responsible astronomer.
    1. A developer will evaluate the custom collection pipeline information as collected in the github project and identify common behaviour with other pipelines. This can only happen with the second and following collections to be moved, but these seem to be common behaviours between collections, and candidates for extraction to common code:
-      1. file retrieval from ad
-      1. file header retrieval from ad
-      1. footprint generation
-      1. filter retrieval (spanish service)
-      1. preview and thumbnail generation
-      1. preview and thumbnail storage to ad
-      1. credential handling
-      1. identification of new/modified files, and grouping for CAOM instance generation
-      1. patterns for identifying inputs to an observation (based on file-naming patterns)
-      1. script invocation
-      1. checking whether a CAOM instance already exists, and retrieving the metadata if it does
-      1. determining whether the /caom2repo endpoint is create or update
-      1. pushing CAOM instances to /caom2repo
-      1. time axis metadata generation
+      1. file retrieval from CADC storage
+      2. file retrieval from https sites
+      3. file retrieval from ftp sites
+      4. file header retrieval from CADC storage
+      5. footprint generation
+      6. filter retrieval (spanish service)
+      7. preview and thumbnail generation
+      8. preview and thumbnail storage to CADC storage
+      9. credential handling
+      10. identification of new/modified files, and grouping for CAOM instance generation
+      11. patterns for identifying inputs to an observation (based on file-naming patterns)
+      12. script invocation
+      13. checking whether a CAOM instance already exists, and retrieving the metadata if it does
+      14. determining whether the caom2 service endpoint is create or update
+      15. pushing CAOM instances to the caom2 service
+      16. time axis metadata generation
    1. A developer will evaluate the custom collection pipeline information for astronomy-specific, collection-specific bits. 
       1. For each bit, the developer will extract that bit to a custom app. 
       1. Candidates for this extraction are limited to code that impacts multiple attributes in the CAOM model at a single invocation, or that cannot be retrieved by WCS-based, astropy-supported metadata. 
       1. This app will:
          1. be an appropriately-named .py script
-         1. provide a function with the signature visit(observation, **kwargs)
-            1. this is consistent with the current visitor
+         1. provide a function with the signature `visit(observation, **kwargs)`
+            1. this is consistent with the current `caom2-repo` [visitor](https://github.com/opencadc/caom2tools.git/tree/master/caom2repo) 
          1. assume that all inputs have been provided
-         1. assume that all outputs will be stored to ad if they are data, and /[sc2|caom2]repo if they are metadata
+         1. assume that all outputs will be stored to CADC storage if they are data, and caom2 services if they are metadata
          1. live in a CDEP package
-      1. For each app, the developer will create repeatable tests, demonstrate the execution of those tests to the DE, and then turn responsibility for maintaining that app over to the DE. 
-      1. The DE is expected to assist in the maintenance of tests.
+      1. For each app, the developer will create repeatable tests. 
    1. A developer will create a pipeline for the complete collection lifecycle.
       1. The first instance will be the foundation of the generic pipeline. The first iteration will be based on OMM.
       1. There will be a generic pipeline.
    1. A developer will create tests for the collection lifecycle pipeline. These will be based on the tests from the representative test files.
    1. A developer will identify and extract the common bits of the custom collection code to common libraries.
       1. The scope for the code considered for this library collection, is that it modifies the value of a single CAOM model attribute when invoked.
-      1. Common library code will not reference FITS or FITS keywords.
+      1. Common library code will not reference FITS files, HDF5 files, or WCS keywords.
    1. A developer will replace existing duplicate code in a custom collection with common library implementations.
-   1. A developer will code or adapt existing code to identify cardinality. The DE will provide the rules for the identification.
+   1. A developer will code or adapt existing code to identify cardinality. An astronomer will provide the rules for the identification.
    1. A developer will test the cardinality identification code.
-   1. The DE will review the results of the cardinality identification for correctness and completeness.
-   1. The DE will review the CAOM instances for the representative test files for:
+   1. The astronomer will review the results of the cardinality identification for correctness and completeness.
+   1. The astronomer will review the CAOM instances for the representative test files for:
       1. consistency with the representation of other collections
       1. general quality assurance
    1. A developer will add the cardinality identification code to the extended pipeline.
    1. A developer will code or adapt existing code that identifies new inputs for dynamic collections.
    1. A developer will test the dynamic input identification code.
    1. A developer will add the dynamic input identification to the extended pipeline.
-   1. A developer will build a Docker container for the extended pipeline.
-   1. A developer will test the extended pipeline container against sc2.
+   1. A developer will build a Docker image for the extended pipeline.
+   1. A developer will test the extended pipeline container against the development sandbox.
    1. A developer will test the extended pipeline container against operations.
    1. A developer will make the extended pipeline container available to Operations.
-   1. Operations will execute the extended pipeline container based on the schedule given by the DE.
-   1. The DE will review a subset of the operational CAOM instances for:
+   1. Operations will execute the extended pipeline container based on the schedule given by the astronomer.
+   1. The astronomer will review a subset of the operational CAOM instances for:
       1. consistency with the representation of other collections
       1. general quality assurance
 
 These are the categories of code in a pipeline:
-   1. custom apps, maintained by the DE
+   1. custom apps, maintained by the astronomer
       1. affects multiple CAOM attributes at once
    1. common library code for pipeline management, maintained by the developer
-   1. common library code for astronomy, maintained by the developer, with the assistance of interested DEs
+   1. common library code for astronomy, maintained by the developer, with the assistance of interested astronomers
       1. not FITS or FITS keyword-specific
-      1. affects a single CAOM attribute
+      2. not HDF5 specific
+      3. affects a single CAOM attribute
    1. collection-specific code that integrates all the other pieces, maintained by the developer
 
-A pipeline can run against development (sc2) or production (www) web services.
+A pipeline can run against the development sandbox (sc2) or production (www) web services.
 
 The development lifecycle of all pipelines is iterative, and each pipeline will have to be addressed every time a collection is transitioned to pipeline behaviour. See the following diagram for a high-level abstraction of the lifecycle of a pipeline. Each box is a casual abstraction of a set of activities for a collection pipeline, and each arrow is an indication of iterative pipeline modification caused by genericization of yet another collection pipeline.
 
@@ -178,19 +182,19 @@ The development lifecycle of all pipelines is iterative, and each pipeline will 
 ## Encapsulating the TDM->CAOM Mapping
 
 There are multiple ways to encapsulate the TDM->CAOM mapping for a collection:
-   1. DEs provide blueprint files, or code to generate the blueprint files. 
+   1. Astronomers provide blueprint files, or code to generate the blueprint files. 
       1. This is new work for every collection except MEGAPIPE and CGPS.
-   1. DEs provide code that creates a blueprint.
+   1. Astronomers provide code that creates a blueprint.
       1. This is new work for every collection.
-   1. DEs provide code that creates an Observation.
+   1. Astronomers provide code that creates an Observation.
       1. This exists for OMM.
-   1. DEs provide code that works with the Java fits2caom2. Developers adapt it, with the approval of the reviewing DE, to the python fits2caom2 execution environment.
+   1. Astronomers provide code that works with the Java fits2caom2. Developers adapt it, with the approval of the reviewing astronomers, to the python fits2caom2 execution environment.
       1. This code exists for multiple collections. 
       1. There is new work required to test this code in the python environment. 
-         1. The DE will identify a representative set of test files.
+         1. The astronomer will identify a representative set of test files.
          1. The developer will set up repeatable tests that use this representative file set.
-         1. Iteratively compare the python CAOM instances with operational CAOM instances, modify the drop-in changes, until the developer and the DE agree the python CAOM instances are correct.
-   1. DEs update the UML for CAOM with the mapping for a collection, which is then turned into a blueprint.
+         1. Iteratively compare the python CAOM instances with operational CAOM instances, modify the drop-in changes, until the developer and the astronomer agree the python CAOM instances are correct.
+   1. Astronomers update the UML for CAOM with the mapping for a collection, which is then turned into a blueprint.
       1. Blueprint generation from the updated model could be automated with the use of draw.io, and the development of a plugin.
 
 ## What Happens When CAOM Changes
@@ -198,10 +202,10 @@ There are multiple ways to encapsulate the TDM->CAOM mapping for a collection:
 Developers evaluate the impact of the model changes. Unless otherwise specified, work here is done by developers.
 
    1. Changes to the cardinality:
-      1. recode the cardinality identification, with input from the DE for all collections
+      1. recode the cardinality identification, with input from the astronomer for all collections
       1. update fits2caom2 blueprint code
       1. for all pipelined collections, update collection-based blueprints, depending on the mechanism the collection used to provide its blueprints
-         1. depending on the model change, this may require DE support, in the form of science expertise, provisioning of test data, review of CAOM instances.
+         1. depending on the model change, this may require astronomer support, in the form of science expertise, provisioning of test data, review of CAOM instances.
       1. test the pipelines
       1. manage the database transition for a breaking change
          1. create a view that represents the new model on the existing CAOM db
@@ -212,8 +216,8 @@ Developers evaluate the impact of the model changes. Unless otherwise specified,
    1. No changes to the cardinality:
       1. rework fits2caom2 blueprint code
       1. rework the collection-based blueprints as necessary, depending on the mechanism the collection used to provide its blueprints. 
-         1. for model changes, depending on the model change, this may require DE support, in the form of science expertise, provisioning of test data, review of CAOM instances.
-         1. for major metadata content fixes, depending on the fix, this may require DE support, in the form of science expertise, provisioning of test data, review of CAOM instances
+         1. for model changes, depending on the model change, this may require astronomer support, in the form of science expertise, provisioning of test data, review of CAOM instances.
+         1. for major metadata content fixes, depending on the fix, this may require astronomer support, in the form of science expertise, provisioning of test data, review of CAOM instances
          1. this can happen over time, collection by collection
       1. test the pipeline
          1. for model changes, manage the database transition for a non-breaking change as described below
@@ -257,22 +261,22 @@ Developers evaluate the impact of the model changes. Unless otherwise specified,
       1. build the default docker container for the pipeline.
       1. the default project and container should be sufficient to ensure that a docker run <container details> python setup.py test command will execute without errors.
       1. it should be possible to create a template github project for this purpose, that can just be forked
-   1. A DE will identify a representative set of test files/inputs for the new collection that will serve as the integration tests for the pipeline.
-   1. Together, a developer and a DE will evaluate what software is required for this pipeline:
+   1. An astrnomer will identify a representative set of test files/inputs for the new collection that will serve as the integration tests for the pipeline.
+   1. Together, a developer and an astronomer will evaluate what software is required for this pipeline:
       1. whether apps or methods already exist in cdep_apps, or new software must be created,
       1. whether the cardinality rules for this application require new software, or existing software will suffice,
       1. whether the dynamic input identification (i.e. how this pipeline discovers there are new observations to ingest) will require new software, or can make use of existing software, and
       1. how to handle data source credentials.
-   1. A DE will provide the TDM -> CAOM mapping for the collection or instrument. See Encapsulating the TDM->CAOM Mapping for the ways this information can be communicated.
+   1. An astronomer will provide the TDM -> CAOM mapping for the collection or instrument. See Encapsulating the TDM->CAOM Mapping for the ways this information can be communicated.
    1. A developer will assemble existing software into the new pipeline.
    1. A developer will write the non-astronomy new software.
    1. A developer will write new or update existing unit tests that cover the new non-astronomy software.
-   1. Given the new pipeline skeleton, a DE will write the astronomy-specific software, or will provide sufficient instruction to the developer so that they can write the astronomy-specific software.
-   1. Given the new pipeline skeleton, a DE or developer will write new or update existing unit tests that cover the new non-astronomy software.
-   1. A developer and/or a DE will repeat until the stand-alone pipeline executes correctly, using the representative set of test files for confirmation.
+   1. Given the new pipeline skeleton, an astronomer will write the astronomy-specific software, or will provide sufficient instruction to the developer so that they can write the astronomy-specific software.
+   1. Given the new pipeline skeleton, an astronomer or developer will write new or update existing unit tests that cover the new non-astronomy software.
+   1. A developer and/or an astronomer will repeat until the stand-alone pipeline executes correctly, using the representative set of test files for confirmation.
    1. A developer will build the pipeline container.
    1. A developer will test the pipeline against sc2.
-   1. A DE will review the sc2 CAOM instances for:
+   1. An astronomer will review the sc2 CAOM instances for:
       1. completeness and correctness of the entities and attribute values,
       1. cardinality choice representations,
       1. consistency with the representation of other collections, and
@@ -285,8 +289,8 @@ Developers evaluate the impact of the model changes. Unless otherwise specified,
       1. TBD list here (I don’t know what goes here …).
    1. A developer will test the pipeline container against operations.
    1. A developer will make the extended pipeline container available to Operations.
-   1. Operations will execute the extended pipeline container based on the schedule given by the DE.
-   1. A DE will review a subset of the operational CAOM instances for:
+   1. Operations will execute the extended pipeline container based on the schedule given by the astronomer.
+   1. An astronomer will review a subset of the operational CAOM instances for:
       1. consistency with the representation of other collections, and
       1. general quality assurance.
 
