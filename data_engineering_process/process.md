@@ -1,4 +1,4 @@
-CADC Data Engineering Process
+# CADC Data Engineering Process
 
 The Canadian Astronomy Data Centre (CADC) Data Engineering Process (CDEP) is the extraction of metadata from a telescope, the transformation of that metadata into a Common Archive Object Model (CAOM) instance, and the making of that instance visible to users by loading it into CADC systems. This system excludes MAST.
 
