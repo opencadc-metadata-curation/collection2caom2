@@ -150,12 +150,13 @@ At the end of a pipeline run, a file named <working directory basename>\_report.
 Location: tests
 Date: 2020-03-18T17:16:08.540069
 Execution Time: 3.98 s
-    Number of Inputs: 1
+    Number of Inputs: 2
  Number of Successes: 0
   Number of Timeouts: 0
    Number of Retries: 1
     Number of Errors: 1
 Number of Rejections: 0
+   Number of Skipped: 1
 ********************************
 ```
 
@@ -166,6 +167,7 @@ Number of Rejections: 0
 - Number of retries: the number of retries executed. Depending on whether and how retry is enabled in config.yml, this value is the cumulative number of entries processed more than once.
 - Number of errors: the number of failures after the final retry. If this number is zero, a retry fixed the failures, so all entries were eventually ingested.
 - Number of rejections: the number of entries that are rejected due to well-known processing failures.
+- Number of skipped: the number of entries with a checksum that is the same at the data source as it is in CADC storage. If the checksum is the same, the pipeline can make no changes to either the data or metdata, so it doesn't try.
 
 ## Repository Configuration
 The CAOM2 repositories:
