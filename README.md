@@ -170,8 +170,11 @@ Number of Rejections: 0
 - Number of skipped: the number of entries with a checksum that is the same at the data source as it is in CADC storage. If the checksum is the same, the pipeline can make no changes to either the data or metdata, so it doesn't try.
 
 ## Repository Configuration
-The CAOM2 repositories:
-  -  will need an operatorGroup and staffGroup to generate read access tuples for QA
+The CAOM2 repositories will need an operatorGroup and staffGroup to automatically generate read access tuples for QA.
+
+If a collection is configured with an operatorGroup and a staffGroup, the service only generates Observation-level `metaReadGroups` and `dataReadGroups` when the release date is null or in the future. If the Observation-level `metaRelease` is in the past at the last time the Observation was updated (shown in `lastModified` timestamp) no Observation-level grants are generated.
+
+If a collection is configured with the operatorGroup and staffGroup not present, then `<collection>2caom2` must set the content of the fields `metaReadGroups` and `dataReadGroups` at the Observation and Plane level.
 
 # Worked Examples
 - with explanations and motivations
@@ -185,13 +188,13 @@ Use this approach if FITS files are stored at CADC, and it's possible to utilize
 
 ### Direct Creation of Plane-level WCS Information
 
-See [the function _build_observation here](https://github.com/opencadc-metadata-curation/draost2caom2/blob/master/draost2caom2/main_app.py) for an example of how to create a Simple Observation, using the class definitions of the python caom2 module, where the WCS information is captured at the Plane level.
+See [the function _build_observation here](https://github.com/opencadc/draost2caom2/blob/master/draost2caom2/main_app.py) for an example of how to create a Simple Observation, using the class definitions of the python caom2 module, where the WCS information is captured at the Plane level.
 
 Use this approach if FITS files are not stored at CADC, or the data does not exist in FITS, and therefore there is no cutout functionality.
 
 ### Blueprint-Based Creation of CAOM2 Information
 
-See [here](https://github.com/opencadc-metadata-curation/vlass2caom2/blob/master/vlass2caom2/vlass2caom2.py) for an example of how to capture the Telescope Data Model to CAOM2 instance mapping using blueprints.
+See [here](https://github.com/opencadc/vlass2caom2/blob/master/vlass2caom2/vlass2caom2.py) for an example of how to capture the Telescope Data Model to CAOM2 instance mapping using blueprints.
 
 Use this approach if the source data is in simple FITS files, and the mapping capabilities of the blueprint functionality are sufficient to capture the idiosyncracies of the TDM->CAOM2 mapping for the telescope in question.
 
@@ -352,9 +355,10 @@ The `chunk.observable` doesn’t currently provide info that is actionable in an
 
 ### Permissions
 
+1. CAOM2 access tuple information is only used for READ access to metadata and data.
 1. The 3 types of read access tuples can be generated in two ways:
     1. The collection can be configured (sc2repo.properties) with an operatorGroup (aka CADC), and staffGroup (aka NGVS) and these directly enable creation of tuples for those two groups; if staffGroup is set, then a 3rd option proposalGroup=true enables generation of groups based on Observation.collection and Observation.proposal.id (and as a side effect, creation of those groups and adding the staffGroup as admin); the TEST collection has the full config; None of these are set for NGVS so no tuples are generated.
-     1. in CAOM-2.4 these permissions are part of the model and read access group URIs can be included in the observation;  thus the client could in principle create arbitrary tuples; this hasn't been done before and it could be a good idea or a bad one depending on the case at hand and how much responsibility the client wants to take (vs using the simple canned rules)
+     1. in CAOM-2.4 these permissions are part of the model and read access group URIs can be included in the observation, thus the client can create arbitrary tuples.
      
 ### MultiPolygon
 
