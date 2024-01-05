@@ -297,6 +297,8 @@ TBD
   - for catalogues, ObsCore and CAOM don't treat those as simply higher calibration level; that's just a different kind of thing that itself could be raw (source detection data) or more processed to produce a calibration level 2 or 3 (product)... although the latter sound more like something in level 7 of that slide.
   - level 6 and 7 products in that slide look more like calibration level 2-3 made/vetted by other teams.
 
+1. There is a use case "get me the files associated with this productID", so during data engineering prefer unique `productID` values.
+
 ### Artifacts
 
 1. Grouping files into observations/planes/artifacts is determined by how independent the files are. A measure of file independence is whether or not the file can be scientifically understood in isolation. Some observational products may be made up of multiple files - e.g. NGVS .flag, .weight, .image files make up the same observational product. Some observational products may be made up of single files - e.g. CFHT o, p, and b files. In this example, the CFHT files are independent, and thus can be grouped in isolation from each other, while the NGVS files are dependent, and should be grouped together.
