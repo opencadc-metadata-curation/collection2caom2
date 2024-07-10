@@ -284,6 +284,15 @@ TBD
 
 ## Things To Know About CAOM2 Observation Construction
 
+### Observations
+
+1. Choose a Simple Observation representation as the default.
+
+1. Choose a Derived Observation representation when:
+    1. stacking
+    2. mosaicing
+    3. splitting out commensal observations
+
 ### Planes
 
 1. Plane-level metadata is only computed for productType=science|calibration. Auxiliary artifacts (or parts or chunks) are expected to be part of another plane with science, unless it is a temporary state caused by ingestion order.
@@ -298,6 +307,9 @@ TBD
   - level 6 and 7 products in that slide look more like calibration level 2-3 made/vetted by other teams.
 
 1. There is a use case "get me the files associated with this productID", so during data engineering prefer unique `productID` values.
+
+1. A Plane can have provenance.inputs in a Simple Observation. For example, if one file is the calibrated version of another file, they should exist in the same Observation, each with their own Plane/Artifact hierarchy, and the calibrated Plane.provenance.inputs will refer to the raw Plane.productID.
+
 
 ### Artifacts
 
