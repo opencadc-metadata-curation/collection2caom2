@@ -15,7 +15,7 @@ The repositories in this github organization address items F2 and F3 from above.
 
 The rich metadata (F2) for telescopes is described in [the Common Archive Observation Model](http://www.opencadc.org/caom2/).
 
-The searchable resource (F3) is [here](http://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/AdvancedSearch/).
+The searchable resource (F3) is [here](https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/search/).
 
 This software eases the transition from the telescope model of the data to the CAOM data model. Once the data is described in CAOM metadata, the search interface provides a well-known location for Findable telescope data.
 
