@@ -294,7 +294,7 @@ TBD
     3. splitting out commensal observations
 
 1. CAOM Collection names vs Storage Inventory (SI) Namespaces - In CAOM the collection is limited to a single path component string and other places to put data release for such surveys is not very visible. LSST, for example, chose to use obs_collection of LSST.DP1 for this reason.
-In SI, the files can be organised into <scheme>:<collection>/DR1 (can have arbitrary paths and namespadce is more loosely any prefix). Technically, it doesn't have to match, but when there is an n..m relationship between
+In SI, the files can be organised into <scheme>:<collection>/DR1 (can have arbitrary paths and namespadce is more loosely any prefix). Technically, the namespace and the collection do not have to match, but when there is an n..m relationship between
 collection and SI namespace it makes artifact validation (caom2 vs SI) harder. For example, validation would have to use 2 collections vs 1 namespace so it is doable (from a query point of view)... but if there are artifacts in SI that don't match we don't know which collection they should belong to.
 
 1. Proposl - (from Pat) proposal is mostly for the creation of SimpleObservation(s) by using the telescope (it may also cover the creation of DerivedObservation(s) if that was part of the stated intent of the observing proposal/plan). DerivedObservation(s) created by another project/effort that happens to re-use those available members/inputs but are not part of an observing proposal per se should not have a proposal at all. The proposal information of the members can be found using a multi-step navigation in the general case.
@@ -322,6 +322,9 @@ collection and SI namespace it makes artifact validation (caom2 vs SI) harder. F
 1. Grouping files into observations/planes/artifacts is determined by how independent the files are. A measure of file independence is whether or not the file can be scientifically understood in isolation. Some observational products may be made up of multiple files - e.g. NGVS .flag, .weight, .image files make up the same observational product. Some observational products may be made up of single files - e.g. CFHT o, p, and b files. In this example, the CFHT files are independent, and thus can be grouped in isolation from each other, while the NGVS files are dependent, and should be grouped together.
 
 1. The impact of `productType`: if an Artifact has `productType = info` it is ignored when the services compute plane metadata.
+
+1. The Artifact.uri value in the CAOM metadata record must match the Artifact.uri value in the Storage Inventory record. These values are in a primary/foreign key relationship between the two systems.
+
 
 ### Chunks
 
