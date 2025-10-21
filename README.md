@@ -297,6 +297,8 @@ TBD
 In SI, the files can be organised into <scheme>:<collection>/DR1 (can have arbitrary paths and namespadce is more loosely any prefix). Technically, it doesn't have to match, but when there is an n..m relationship between
 collection and SI namespace it makes artifact validation (caom2 vs SI) harder. For example, validation would have to use 2 collections vs 1 namespace so it is doable (from a query point of view)... but if there are artifacts in SI that don't match we don't know which collection they should belong to.
 
+1. Proposl - (from Pat) proposal is mostly for the creation of SimpleObservation(s) by using the telescope (it may also cover the creation of DerivedObservation(s) if that was part of the stated intent of the observing proposal/plan). DerivedObservation(s) created by another project/effort that happens to re-use those available members/inputs but are not part of an observing proposal per se should not have a proposal at all. The proposal information of the members can be found using a multi-step navigation in the general case.
+
 ### Planes
 
 1. Plane-level metadata is only computed for productType=science|calibration. Auxiliary artifacts (or parts or chunks) are expected to be part of another plane with science, unless it is a temporary state caused by ingestion order.
