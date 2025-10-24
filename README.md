@@ -268,7 +268,7 @@ TBD
 # Tricks and Traps
 - what might confuse users about API and address it directly
 - explain why each gothca is the way it is
-- all pipeline execution control comes from the file config.yml, so it must exist in the working directory. See [here](https://github.com/opencadc/collection2caom2/wiki/config.yml) for a description of its contents.
+- all pipeline execution control comes from the file config.yml, so it must exist in the working directory. See [here](https://github.com/opencadc-metadata-curation/collection2caom2/wiki/config.yml) for a description of its contents.
 - add the create/update - must read to update from /ams/caom2repo/sc2repo
 - repos are all on master, so anyone at any time can pull a repo and build a working version of any pipeline container
 - use feature flags to limit the side-effects of work-in-progress commits
