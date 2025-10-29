@@ -182,19 +182,19 @@ If a collection is configured with the operatorGroup and staffGroup not present,
 
 ### Direct Creation of Part- and Chunk-level WCS Information
 
-See [here](https://github.com/opencadc/caom2tools/tree/master/caom2) for an example of how to create a minimal, or a complete Simple Observation, using the class definitions of the python caom2 module, where the WCS information is captured at the Chunk level.
+See [here](https://github.com/opencadc-metadata-curation/caom2tools/tree/master/caom2) for an example of how to create a minimal, or a complete Simple Observation, using the class definitions of the python caom2 module, where the WCS information is captured at the Chunk level.
 
 Use this approach if FITS files are stored at CADC, and it's possible to utilize the existing CADC cutout functionality.
 
 ### Direct Creation of Plane-level WCS Information
 
-See [the function _build_observation here](https://github.com/opencadc/draost2caom2/blob/master/draost2caom2/main_app.py) for an example of how to create a Simple Observation, using the class definitions of the python caom2 module, where the WCS information is captured at the Plane level.
+See [the function _build_observation here](https://github.com/opencadc-metadata-curation/draost2caom2/blob/master/draost2caom2/main_app.py) for an example of how to create a Simple Observation, using the class definitions of the python caom2 module, where the WCS information is captured at the Plane level.
 
 Use this approach if FITS files are not stored at CADC, or the data does not exist in FITS, and therefore there is no cutout functionality.
 
 ### Blueprint-Based Creation of CAOM2 Information
 
-See [here](https://github.com/opencadc/vlass2caom2/blob/master/vlass2caom2/vlass2caom2.py) for an example of how to capture the Telescope Data Model to CAOM2 instance mapping using blueprints.
+See [here](https://github.com/opencadc-metadata-curation/vlass2caom2/blob/master/vlass2caom2/vlass2caom2.py) for an example of how to capture the Telescope Data Model to CAOM2 instance mapping using blueprints.
 
 Use this approach if the source data is in simple FITS files, and the mapping capabilities of the blueprint functionality are sufficient to capture the idiosyncracies of the TDM->CAOM2 mapping for the telescope in question.
 
@@ -268,7 +268,7 @@ TBD
 # Tricks and Traps
 - what might confuse users about API and address it directly
 - explain why each gothca is the way it is
-- all pipeline execution control comes from the file config.yml, so it must exist in the working directory. See [here](https://github.com/opencadc/collection2caom2/wiki/config.yml) for a description of its contents.
+- all pipeline execution control comes from the file config.yml, so it must exist in the working directory. See [here](https://github.com/opencadc-metadata-curation/collection2caom2/wiki/config.yml) for a description of its contents.
 - add the create/update - must read to update from /ams/caom2repo/sc2repo
 - repos are all on master, so anyone at any time can pull a repo and build a working version of any pipeline container
 - use feature flags to limit the side-effects of work-in-progress commits
