@@ -277,7 +277,7 @@ TBD
 
 1. Authorization only consults /ams content, so even if the group and membership configuration is consistent and correct, if something is not always and only public, it must exist in /ams for file download to work.
 
-   Thumbnails and previews are also affected by this /ams-only check. Viewing these files only works on sc2 if the metadata that refers to the files is also present in /ams.
+   Thumbnails and previews are also affected by this /ams-only check. Viewing these files only works on sc2 if the metadata that refers to the files is also present in /ams. The production `ams.properties` file entry also has to have an `artifactPattern=scheme:COLLECTION/` segment in the `COLLECTION` entry.
  
 1. An sc2 side-effect: if a collection is configured with operatorGroup and staffGroup in both ams and sc2repo, two common grants are generated. In ams, if the collection also has proposalGroup=true, ams will create a 3rd grant. That setting is not enabled in sc2repo, so a record generated from sc2repo will lack the proposal group grant. This is on purpose because the creation of the proposal group grant also, as a side efect, creates the group and this side effect should not be triggered by sandbox usage (because metadata there is potentially incorrect  and fixing it can't fix/delete previously created groups).
  
